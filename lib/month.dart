@@ -22,7 +22,7 @@ class _MonthPageState extends State<MonthPage> {
             focusedDay: _focusedDay,
             firstDay: DateTime(2023),
             lastDay: DateTime(2030),
-            rowHeight: MediaQuery.of(context).size.height * 0.15, // Set the row height based on the screen height
+            rowHeight: MediaQuery.of(context).size.height * 0.15,
             onFormatChanged: (format) {
               setState(() {
                 _calendarFormat = format;
@@ -75,7 +75,7 @@ class _MonthPageState extends State<MonthPage> {
                       SizedBox(height: 4),
                       Center(
                         child: Text(
-                          'Events', // Replace with your desired header text
+                          'Events', 
                           style: TextStyle(
                             color: Colors.grey[500],
                             fontSize: 12,
