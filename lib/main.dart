@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'month.dart';
+import 'pages/homePage.dart';
 
 void main() {
-  runApp(CalendarApp());
+  runApp(MainApp());
 }
 
-class CalendarApp extends StatelessWidget {
+class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -13,7 +13,8 @@ class CalendarApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MonthPage(),
+      debugShowCheckedModeBanner: false,
+      home: HomePage(),
     );
   }
 }
