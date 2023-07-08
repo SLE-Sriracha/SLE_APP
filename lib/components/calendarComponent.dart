@@ -26,7 +26,7 @@ class _calendarComponentState extends State<calendarComponent> {
             focusedDay: _focusedDay,
             firstDay: DateTime(2023),
             lastDay: DateTime(2030),
-            rowHeight: MediaQuery.of(context).size.height * 0.13,
+            rowHeight: MediaQuery.of(context).size.height * 0.134,
             onFormatChanged: (format) {
               setState(() {
                 _calendarFormat = format;
