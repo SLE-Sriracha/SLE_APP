@@ -65,6 +65,9 @@ class _calendarComponentState extends State<calendarComponent> {
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
+                    const Spacer(
+                      flex: 1,
+                    ),
                     const SizedBox(
                       height: 10,
                     ),
@@ -87,6 +90,9 @@ class _calendarComponentState extends State<calendarComponent> {
                         ),
                       ),
                     ),
+                    const Spacer(
+                      flex: 1,
+                    ),
                   ],
                 );
               },
@@ -94,6 +100,9 @@ class _calendarComponentState extends State<calendarComponent> {
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
+                    const Spacer(
+                      flex: 1,
+                    ),
                     const SizedBox(
                       height: 10,
                     ),
@@ -126,13 +135,19 @@ class _calendarComponentState extends State<calendarComponent> {
                         ),
                       ),
                     ),
+                    const Spacer(
+                      flex: 1,
+                    ),
                   ],
                 );
               },
               todayBuilder: (contex, date, focusedDay) {
                 return Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    const Spacer(
+                      flex: 1,
+                    ),
                     const SizedBox(
                       height: 10,
                     ),
@@ -154,6 +169,9 @@ class _calendarComponentState extends State<calendarComponent> {
                           fontSize: 12,
                         ),
                       ),
+                    ),
+                    const Spacer(
+                      flex: 1,
                     ),
                   ],
                 );
