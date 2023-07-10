@@ -18,12 +18,12 @@ class _calendarComponentState extends State<calendarComponent> {
     return Scaffold(
       body: Center(
         child: SizedBox(
-          width: MediaQuery.sizeOf(context).width * 0.95,
+          width: MediaQuery.sizeOf(context).width * 0.9,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              SizedBox(height: 5),
+              SizedBox(height: 10),
               TableCalendar(
                 calendarFormat: _calendarFormat,
                 focusedDay: _focusedDay,
