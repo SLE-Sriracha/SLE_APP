@@ -88,33 +88,68 @@ class _calendarComponentState extends State<calendarComponent> {
                           color: Colors.grey[500],
                           fontSize: 12,
                         ),
-                      ),
-                    ),
-                    const Spacer(
-                      flex: 1,
-                    ),
-                  ],
-                );
-              },
-              selectedBuilder: (contex, date, focusedDay) {
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    const Spacer(
-                      flex: 1,
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      height: 20,
-                      width: 20,
-                      decoration: const BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.all(Radius.circular(20)),
-                      ),
-                      child: Center(
-                        child: Text(
+                        const Spacer(
+                          flex: 1,
+                        ),
+                      ],
+                    );
+                  },
+                  selectedBuilder: (contex, date, focusedDay) {
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        const Spacer(
+                          flex: 1,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          height: 20,
+                          width: 20,
+                          decoration: const BoxDecoration(
+                            color: Colors.blue,
+                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                          ),
+                          child: Center(
+                            child: Text(
+                              '${date.day}',
+                              style: TextStyle(
+                                color: isSameDay(_selectedDay, date)
+                                    ? Colors.white
+                                    : Colors.black,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Center(
+                          child: Text(
+                            'Events',
+                            style: TextStyle(
+                              color: Colors.grey[500],
+                              fontSize: 12,
+                            ),
+                          ),
+                        ),
+                        const Spacer(
+                          flex: 1,
+                        ),
+                      ],
+                    );
+                  },
+                  todayBuilder: (contex, date, focusedDay) {
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Spacer(
+                          flex: 1,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Text(
                           '${date.day}',
                           style: TextStyle(
                             color: isSameDay(_selectedDay, date)
@@ -123,62 +158,27 @@ class _calendarComponentState extends State<calendarComponent> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                      ),
-                    ),
-                    const SizedBox(height: 4),
-                    Center(
-                      child: Text(
-                        'Events',
-                        style: TextStyle(
-                          color: Colors.grey[500],
-                          fontSize: 12,
+                        const SizedBox(height: 4),
+                        Center(
+                          child: Text(
+                            'Events',
+                            style: TextStyle(
+                              color: Colors.grey[500],
+                              fontSize: 12,
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                    const Spacer(
-                      flex: 1,
-                    ),
-                  ],
-                );
-              },
-              todayBuilder: (contex, date, focusedDay) {
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Spacer(
-                      flex: 1,
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      '${date.day}',
-                      style: TextStyle(
-                        color: isSameDay(_selectedDay, date)
-                            ? Colors.white
-                            : Colors.black,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 4),
-                    Center(
-                      child: Text(
-                        'Events',
-                        style: TextStyle(
-                          color: Colors.grey[500],
-                          fontSize: 12,
+                        const Spacer(
+                          flex: 1,
                         ),
-                      ),
-                    ),
-                    const Spacer(
-                      flex: 1,
-                    ),
-                  ],
-                );
-              },
-            ),
+                      ],
+                    );
+                  },
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
       bottomNavigationBar: Container(
         height: 40,

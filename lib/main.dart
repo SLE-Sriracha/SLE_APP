@@ -1,5 +1,7 @@
+import 'package:app/pages/myPage.dart';
 import 'package:flutter/material.dart';
 import 'pages/homePage.dart';
+import 'pages/myPage.dart';
 
 void main() {
   runApp(MainApp());
@@ -15,6 +17,11 @@ class MainApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       home: HomePage(),
+      initialRoute: '/home',
+      routes: {
+        '/home': (context) => HomePage(),
+        '/mypage': (context) => MyPage(),
+      },
     );
   }
 }
