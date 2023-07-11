@@ -18,18 +18,18 @@ class _calendarComponentState extends State<calendarComponent> {
     return Scaffold(
       body: Center(
         child: SizedBox(
-          width: MediaQuery.sizeOf(context).width * 0.9,
+          width: MediaQuery.of(context).size.width * 0.95,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              SizedBox(height: 10),
+              SizedBox(height: 5),
               TableCalendar(
                 calendarFormat: _calendarFormat,
                 focusedDay: _focusedDay,
                 firstDay: DateTime(2023),
                 lastDay: DateTime(2030),
-                rowHeight: MediaQuery.of(context).size.height * 0.11,
+                rowHeight: MediaQuery.of(context).size.height * 0.12,
                 onFormatChanged: (format) {
                   setState(() {
                     _calendarFormat = format;
@@ -159,7 +159,7 @@ class _calendarComponentState extends State<calendarComponent> {
                           style: TextStyle(
                             color: isSameDay(_selectedDay, date)
                                 ? Colors.white
-                                : Colors.black,
+                                : Colors.red,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
