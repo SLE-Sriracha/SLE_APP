@@ -99,7 +99,7 @@ class _calendarComponentState extends State<calendarComponent> {
                       ],
                     );
                   },
-                  selectedBuilder: (contex, date, focusedDay) {
+                  selectedBuilder: (context, date, focusedDay) {
                     return Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
@@ -114,7 +114,7 @@ class _calendarComponentState extends State<calendarComponent> {
                           width: 20,
                           decoration: const BoxDecoration(
                             color: Colors.blue,
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                            shape: BoxShape.circle,
                           ),
                           child: Center(
                             child: Text(
@@ -144,7 +144,7 @@ class _calendarComponentState extends State<calendarComponent> {
                       ],
                     );
                   },
-                  todayBuilder: (contex, date, focusedDay) {
+                  todayBuilder: (context, date, focusedDay) {
                     return Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -154,13 +154,20 @@ class _calendarComponentState extends State<calendarComponent> {
                         const SizedBox(
                           height: 10,
                         ),
-                        Text(
-                          '${date.day}',
-                          style: TextStyle(
-                            color: isSameDay(_selectedDay, date)
-                                ? Colors.white
-                                : Colors.red,
-                            fontWeight: FontWeight.bold,
+                        Container(
+                          height: 22,
+                          width: 25,
+                          color: Colors.black,
+                          child: Center(
+                            child: Text(
+                              '${date.day}',
+                              style: TextStyle(
+                                color: isSameDay(_selectedDay, date)
+                                    ? Colors.white
+                                    : Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                           ),
                         ),
                         const SizedBox(height: 4),
