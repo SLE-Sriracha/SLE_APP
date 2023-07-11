@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:intl/intl.dart';
+import '../pages/eventPage.dart';
 
 class calendarComponent extends StatefulWidget {
   @override
@@ -13,185 +14,180 @@ class _calendarComponentState extends State<calendarComponent> {
   DateTime _focusedDay = DateTime.now();
   var formatter = DateFormat('yyyy-MM-dd');
 
+  bool _isAddingEvent = false; // Track if event adding window is open
+  List<String> _events = []; // List to store events
+  TextEditingController _eventController = TextEditingController(); // Controller for event text
+
+  @override
+  void dispose() {
+    _eventController.dispose();
+    super.dispose();
+  }
+
+  void _openAddEventWindow(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return EventAdderPage(
+          onEventAdded: (eventDetails) {
+            // Handle event details as desired (e.g., save to database)
+            print('Event added: $eventDetails');
+
+            setState(() {
+              _isAddingEvent = false;
+              _events.add(eventDetails); // Add event to the list
+              _eventController.clear();
+            });
+
+            Navigator.of(context, rootNavigator: true).pop(); // Close the dialog
+          },
+        );
+      },
+    );
+  }
+
+  void _deleteEvent(String event) {
+    setState(() {
+      _events.remove(event); // Remove event from the list
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: SizedBox(
-          width: MediaQuery.of(context).size.width * 0.95,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              SizedBox(height: 5),
-              TableCalendar(
-                calendarFormat: _calendarFormat,
-                focusedDay: _focusedDay,
-                firstDay: DateTime(2023),
-                lastDay: DateTime(2030),
-                rowHeight: MediaQuery.of(context).size.height * 0.12,
-                onFormatChanged: (format) {
-                  setState(() {
-                    _calendarFormat = format;
-                  });
-                },
-                onPageChanged: (focusedDay) {
-                  setState(() {
-                    _focusedDay = focusedDay;
-                  });
-                },
-                selectedDayPredicate: (day) {
-                  return isSameDay(_selectedDay, day);
-                },
-                onDaySelected: (selectedDay, focusedDay) {
-                  setState(() {
-                    _selectedDay = selectedDay;
-                    _focusedDay = focusedDay;
-                  });
-                },
-                calendarStyle: CalendarStyle(
-                  defaultDecoration: BoxDecoration(
-                    shape: BoxShape.rectangle,
-                    color: Colors.grey[200],
+      body: SingleChildScrollView( // Wrap body with SingleChildScrollView
+        child: Center(
+          child: SizedBox(
+            width: MediaQuery.of(context).size.width * 0.95,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(height: 5),
+                TableCalendar(
+                  calendarFormat: _calendarFormat,
+                  focusedDay: _focusedDay,
+                  firstDay: DateTime(2023),
+                  lastDay: DateTime(2030),
+                  rowHeight: MediaQuery.of(context).size.height * 0.12,
+                  onFormatChanged: (format) {
+                    setState(() {
+                      _calendarFormat = format;
+                    });
+                  },
+                  onPageChanged: (focusedDay) {
+                    setState(() {
+                      _focusedDay = focusedDay;
+                    });
+                  },
+                  selectedDayPredicate: (day) {
+                    return isSameDay(_selectedDay, day);
+                  },
+                  onDaySelected: (selectedDay, focusedDay) {
+                    if (_isAddingEvent) {
+                      // If event adding window is open, ignore day selection
+                      return;
+                    }
+
+                    if (isSameDay(_selectedDay, selectedDay)) {
+                      // If the same day is selected twice, open the event adding window
+                      setState(() {
+                        _isAddingEvent = true;
+                      });
+                      _openAddEventWindow(context);
+                    } else {
+                      // Otherwise, update the selected day
+                      setState(() {
+                        _selectedDay = selectedDay;
+                        _focusedDay = focusedDay;
+                      });
+                    }
+                  },
+                  calendarStyle: CalendarStyle(
+                    defaultDecoration: BoxDecoration(
+                      shape: BoxShape.rectangle,
+                      color: Colors.grey[200],
+                    ),
+                    selectedDecoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.blue,
+                    ),
+                    todayDecoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.grey,
+                    ),
                   ),
-                  selectedDecoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.blue,
-                  ),
-                  todayDecoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.grey[300],
-                  ),
-                ),
-                calendarBuilders: CalendarBuilders(
-                  defaultBuilder: (context, date, focusedDay) {
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        const Spacer(
-                          flex: 1,
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          '${date.day}',
-                          style: TextStyle(
-                            color: isSameDay(_selectedDay, date)
-                                ? Colors.white
-                                : Colors.black,
-                            fontWeight: FontWeight.bold,
+                  calendarBuilders: CalendarBuilders(
+                    defaultBuilder: (context, date, focusedDay) {
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          const Spacer(
+                            flex: 1,
                           ),
-                        ),
-                        const SizedBox(height: 4),
-                        Center(
-                          child: Text(
-                            'Events',
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            '${date.day}',
                             style: TextStyle(
-                              color: Colors.grey[500],
-                              fontSize: 12,
+                              color: isSameDay(_selectedDay, date)
+                                  ? Colors.white
+                                  : Colors.black,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
-                        ),
-                        const Spacer(
-                          flex: 1,
-                        ),
-                      ],
-                    );
-                  },
-                  selectedBuilder: (context, date, focusedDay) {
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        const Spacer(
-                          flex: 1,
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          height: 20,
-                          width: 20,
-                          decoration: const BoxDecoration(
-                            color: Colors.blue,
-                            shape: BoxShape.circle,
-                          ),
-                          child: Center(
+                          const SizedBox(height: 4),
+                          Center(
                             child: Text(
-                              '${date.day}',
+                              'Events',
                               style: TextStyle(
-                                color: isSameDay(_selectedDay, date)
-                                    ? Colors.white
-                                    : Colors.black,
-                                fontWeight: FontWeight.bold,
+                                color: Colors.grey[500],
+                                fontSize: 12,
                               ),
                             ),
                           ),
-                        ),
-                        const SizedBox(height: 4),
-                        Center(
-                          child: Text(
-                            'Events',
-                            style: TextStyle(
-                              color: Colors.grey[500],
-                              fontSize: 12,
-                            ),
+                          Column(
+                            children: _events
+                                .where((event) => isSameDay(date, _selectedDay))
+                                .map((event) {
+                              return Column(
+                                children: [
+                                  Text(event),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      _deleteEvent(event);
+                                    },
+                                    child: Text('Delete'),
+                                  ),
+                                ],
+                              );
+                            }).toList(),
                           ),
-                        ),
-                        const Spacer(
-                          flex: 1,
-                        ),
-                      ],
-                    );
-                  },
-                  todayBuilder: (context, date, focusedDay) {
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Spacer(
-                          flex: 1,
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          height: 22,
-                          width: 25,
-                          color: Colors.black,
-                          child: Center(
-                            child: Text(
-                              '${date.day}',
-                              style: TextStyle(
-                                color: isSameDay(_selectedDay, date)
-                                    ? Colors.white
-                                    : Colors.white,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
+                          const Spacer(
+                            flex: 1,
                           ),
-                        ),
-                        const SizedBox(height: 4),
-                        Center(
-                          child: Text(
-                            'Events',
-                            style: TextStyle(
-                              color: Colors.grey[500],
-                              fontSize: 12,
-                            ),
-                          ),
-                        ),
-                        const Spacer(
-                          flex: 1,
-                        ),
-                      ],
-                    );
-                  },
+                        ],
+                      );
+                    },
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
+      floatingActionButton: _isAddingEvent
+          ? null
+          : FloatingActionButton(
+              onPressed: () {
+                setState(() {
+                  _isAddingEvent = true;
+                });
+                _openAddEventWindow(context);
+              },
+              child: Icon(Icons.add),
+            ),
       bottomNavigationBar: Container(
         height: 40,
         color: Colors.grey[200],
