@@ -14,9 +14,9 @@ class _calendarComponentState extends State<calendarComponent> {
   DateTime _focusedDay = DateTime.now();
   var formatter = DateFormat('yyyy-MM-dd');
 
-  bool _isAddingEvent = false; // Track if event adding window is open
-  List<String> _events = []; // List to store events
-  TextEditingController _eventController = TextEditingController(); // Controller for event text
+  bool _isAddingEvent = false; 
+  List<String> _events = []; 
+  TextEditingController _eventController = TextEditingController(); 
 
   @override
   void dispose() {
@@ -30,16 +30,15 @@ class _calendarComponentState extends State<calendarComponent> {
       builder: (context) {
         return EventAdderPage(
           onEventAdded: (eventDetails) {
-            // Handle event details as desired (e.g., save to database)
             print('Event added: $eventDetails');
 
             setState(() {
               _isAddingEvent = false;
-              _events.add(eventDetails); // Add event to the list
+              _events.add(eventDetails); 
               _eventController.clear();
             });
 
-            Navigator.of(context, rootNavigator: true).pop(); // Close the dialog
+            Navigator.of(context, rootNavigator: true).pop();
           },
         );
       },
@@ -85,18 +84,15 @@ class _calendarComponentState extends State<calendarComponent> {
                   },
                   onDaySelected: (selectedDay, focusedDay) {
                     if (_isAddingEvent) {
-                      // If event adding window is open, ignore day selection
                       return;
                     }
 
                     if (isSameDay(_selectedDay, selectedDay)) {
-                      // If the same day is selected twice, open the event adding window
                       setState(() {
                         _isAddingEvent = true;
                       });
                       _openAddEventWindow(context);
                     } else {
-                      // Otherwise, update the selected day
                       setState(() {
                         _selectedDay = selectedDay;
                         _focusedDay = focusedDay;
