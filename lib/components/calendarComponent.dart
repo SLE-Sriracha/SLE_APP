@@ -14,9 +14,9 @@ class _calendarComponentState extends State<calendarComponent> {
   DateTime _focusedDay = DateTime.now();
   var formatter = DateFormat('yyyy-MM-dd');
 
-  bool _isAddingEvent = false; 
-  List<String> _events = []; 
-  TextEditingController _eventController = TextEditingController(); 
+  bool _isAddingEvent = false;
+  List<String> _events = [];
+  TextEditingController _eventController = TextEditingController();
 
   @override
   void dispose() {
@@ -34,7 +34,7 @@ class _calendarComponentState extends State<calendarComponent> {
 
             setState(() {
               _isAddingEvent = false;
-              _events.add(eventDetails); 
+              _events.add(eventDetails);
               _eventController.clear();
             });
 
@@ -45,16 +45,11 @@ class _calendarComponentState extends State<calendarComponent> {
     );
   }
 
-  void _deleteEvent(String event) {
-    setState(() {
-      _events.remove(event); // Remove event from the list
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView( // Wrap body with SingleChildScrollView
+      body: SingleChildScrollView(
         child: Center(
           child: SizedBox(
             width: MediaQuery.of(context).size.width * 0.95,
@@ -69,6 +64,22 @@ class _calendarComponentState extends State<calendarComponent> {
                   firstDay: DateTime(2023),
                   lastDay: DateTime(2030),
                   rowHeight: MediaQuery.of(context).size.height * 0.12,
+                  headerStyle: HeaderStyle(
+                    titleCentered: true,
+                    formatButtonVisible: false,
+                    titleTextStyle: const TextStyle(
+                      fontSize: 20.0,
+                      color: Colors.black,
+                    ),
+                    leftChevronIcon: const Icon(
+                      Icons.arrow_left,
+                      size: 40.0,
+                    ),
+                    rightChevronIcon: const Icon(
+                      Icons.arrow_right,
+                      size: 40.0,
+                    ),
+                  ),
                   onFormatChanged: (format) {
                     setState(() {
                       _calendarFormat = format;
@@ -143,23 +154,6 @@ class _calendarComponentState extends State<calendarComponent> {
                               ),
                             ),
                           ),
-                          Column(
-                            children: _events
-                                .where((event) => isSameDay(date, _selectedDay))
-                                .map((event) {
-                              return Column(
-                                children: [
-                                  Text(event),
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      _deleteEvent(event);
-                                    },
-                                    child: Text('Delete'),
-                                  ),
-                                ],
-                              );
-                            }).toList(),
-                          ),
                           const Spacer(
                             flex: 1,
                           ),
@@ -176,14 +170,14 @@ class _calendarComponentState extends State<calendarComponent> {
       floatingActionButton: _isAddingEvent
           ? null
           : FloatingActionButton(
-              onPressed: () {
-                setState(() {
-                  _isAddingEvent = true;
-                });
-                _openAddEventWindow(context);
-              },
-              child: Icon(Icons.add),
-            ),
+        onPressed: () {
+          setState(() {
+            _isAddingEvent = true;
+          });
+          _openAddEventWindow(context);
+        },
+        child: Icon(Icons.add),
+      ),
       bottomNavigationBar: Container(
         height: 40,
         color: Colors.grey[200],
@@ -197,3 +191,4 @@ class _calendarComponentState extends State<calendarComponent> {
     );
   }
 }
+
