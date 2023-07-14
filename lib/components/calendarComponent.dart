@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:intl/intl.dart';
-import '../pages/eventPage.dart';
+// import '../pages/eventPage.dart';
 
-class calendarComponent extends StatefulWidget {
+class CalendarComponent extends StatefulWidget {
   @override
-  _calendarComponentState createState() => _calendarComponentState();
+  _CalendarComponentState createState() => _CalendarComponentState();
 }
 
-class _calendarComponentState extends State<calendarComponent> {
+class _CalendarComponentState extends State<CalendarComponent> {
   CalendarFormat _calendarFormat = CalendarFormat.month;
   DateTime _selectedDay = DateTime.now();
   DateTime _focusedDay = DateTime.now();
@@ -24,27 +24,26 @@ class _calendarComponentState extends State<calendarComponent> {
     super.dispose();
   }
 
-  void _openAddEventWindow(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return EventAdderPage(
-          onEventAdded: (eventDetails) {
-            print('Event added: $eventDetails');
+  // void _openAddEventWindow(BuildContext context) {
+  //   showDialog(
+  //     context: context,
+  //     builder: (context) {
+  //       return EventAdderPage(
+  //         onEventAdded: (eventDetails) {
+  //           print('Event added: $eventDetails');
 
-            setState(() {
-              _isAddingEvent = false;
-              _events.add(eventDetails);
-              _eventController.clear();
-            });
+  //           setState(() {
+  //             _isAddingEvent = false;
+  //             _events.add(eventDetails);
+  //             _eventController.clear();
+  //           });
 
-            Navigator.of(context, rootNavigator: true).pop();
-          },
-        );
-      },
-    );
-  }
-
+  //           Navigator.of(context, rootNavigator: true).pop();
+  //         },
+  //       );
+  //     },
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -57,25 +56,25 @@ class _calendarComponentState extends State<calendarComponent> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                SizedBox(height: 5),
+                const SizedBox(height: 5),
                 TableCalendar(
                   calendarFormat: _calendarFormat,
                   focusedDay: _focusedDay,
                   firstDay: DateTime(2023),
                   lastDay: DateTime(2030),
                   rowHeight: MediaQuery.of(context).size.height * 0.12,
-                  headerStyle: HeaderStyle(
+                  headerStyle: const HeaderStyle(
                     titleCentered: true,
                     formatButtonVisible: false,
-                    titleTextStyle: const TextStyle(
+                    titleTextStyle: TextStyle(
                       fontSize: 20.0,
                       color: Colors.black,
                     ),
-                    leftChevronIcon: const Icon(
+                    leftChevronIcon: Icon(
                       Icons.arrow_left,
                       size: 40.0,
                     ),
-                    rightChevronIcon: const Icon(
+                    rightChevronIcon: Icon(
                       Icons.arrow_right,
                       size: 40.0,
                     ),
@@ -102,7 +101,7 @@ class _calendarComponentState extends State<calendarComponent> {
                       setState(() {
                         _isAddingEvent = true;
                       });
-                      _openAddEventWindow(context);
+                      // _openAddEventWindow(context);
                     } else {
                       setState(() {
                         _selectedDay = selectedDay;
@@ -119,7 +118,7 @@ class _calendarComponentState extends State<calendarComponent> {
                       shape: BoxShape.circle,
                       color: Colors.blue,
                     ),
-                    todayDecoration: BoxDecoration(
+                    todayDecoration: const BoxDecoration(
                       shape: BoxShape.circle,
                       color: Colors.grey,
                     ),
@@ -170,14 +169,14 @@ class _calendarComponentState extends State<calendarComponent> {
       floatingActionButton: _isAddingEvent
           ? null
           : FloatingActionButton(
-        onPressed: () {
-          setState(() {
-            _isAddingEvent = true;
-          });
-          _openAddEventWindow(context);
-        },
-        child: Icon(Icons.add),
-      ),
+              onPressed: () {
+                setState(() {
+                  _isAddingEvent = true;
+                });
+                // _openAddEventWindow(context);
+              },
+              child: const Icon(Icons.add),
+            ),
       bottomNavigationBar: Container(
         height: 40,
         color: Colors.grey[200],
@@ -191,4 +190,3 @@ class _calendarComponentState extends State<calendarComponent> {
     );
   }
 }
-
