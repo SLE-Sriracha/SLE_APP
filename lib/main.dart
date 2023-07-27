@@ -1,11 +1,16 @@
+import 'package:app/pages/loginPage.dart';
 import 'package:app/pages/myPage.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'pages/homePage.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   initializeDateFormatting().then((_) => runApp(MainApp()));
 }
+
 
 class MainApp extends StatelessWidget {
   @override
@@ -17,10 +22,11 @@ class MainApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       home: HomePage(),
-      initialRoute: '/home',
+      initialRoute: '/login',
       routes: {
         '/home': (context) => HomePage(),
         '/mypage': (context) => MyPage(),
+        '/login' : (context) => Login(),
       },
     );
   }
