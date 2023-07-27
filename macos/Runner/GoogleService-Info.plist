@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>606136581372-b9oj29810v09p3ugbt89io2g9g2l56ua.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.606136581372-b9oj29810v09p3ugbt89io2g9g2l56ua</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>606136581372-05svg60rt3k0618s03oqkj9a7l5a1cur.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBH0safxKxBCuRjkkxgFy6QgmjOanZq1N8</string>
+	<key>GCM_SENDER_ID</key>
+	<string>606136581372</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.app</string>
+	<key>PROJECT_ID</key>
+	<string>sriracha-92159</string>
+	<key>STORAGE_BUCKET</key>
+	<string>sriracha-92159.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:606136581372:ios:d7891bf2a50a17897c2b79</string>
+	<key>DATABASE_URL</key>
+	<string>https://sriracha-92159-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>
