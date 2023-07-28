@@ -18,7 +18,7 @@ class _LoginState extends State<Login> {
       body: SafeArea(
         child: Column(
           children: <Widget>[
-            const SizedBox(height: 150.0),
+            const SizedBox(height: 100.0),
             Container(
               height: 153,
               child: Image.asset('assets/sriracha.png'),
@@ -45,7 +45,7 @@ class _LoginState extends State<Login> {
             ),
 
             const SizedBox(
-              height: 270,
+              height: 250,
             ),
             Row(
               children: const [
