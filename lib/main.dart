@@ -1,3 +1,5 @@
+import 'package:app/pages/addSchedule.dart';
+import 'package:app/pages/dailyPage.dart';
 import 'package:app/pages/loginPage.dart';
 import 'package:app/pages/myPage.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -32,6 +34,8 @@ class MainApp extends StatelessWidget {
         '/home': (context) => const HomePage(),
         '/mypage': (context) => const MyPage(),
         '/login' : (context) => const Login(),
+        '/daily' : (context) => const DayPage(),
+        '/add' : (context) => AddSchedule(),
       },
     );
   }
