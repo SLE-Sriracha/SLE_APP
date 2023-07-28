@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "sriracha_calli.jpg",
+      "filename" : "chicken_appicon.jpg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "sriracha_calli 1.jpg",
+      "filename" : "chicken_appicon 1.jpg",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "sriracha_calli 2.jpg",
+      "filename" : "chicken_appicon 2.jpg",
       "idiom" : "universal",
       "scale" : "3x"
     }
