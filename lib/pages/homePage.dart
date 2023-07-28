@@ -48,13 +48,12 @@ class _HomePageState extends State<HomePage> {
                 Navigator.pushNamed(context, '/mypage');
               },
             ),
-            // ListTile(
-            //   title: const Text('Item 2'),
-            //   onTap: () {
-            //     // Update the state of the app.
-            //     // ...
-            //   },
-            // ),
+            ListTile(
+              title: const Text('Daily'),
+              onTap: () {
+                Navigator.pushNamed(context, '/daily');
+              },
+            ),
           ],
         ),
       ),
@@ -70,8 +69,7 @@ class _HomePageState extends State<HomePage> {
                   focusedDay: _focusedDay,
                   firstDay: DateTime(2023),
                   lastDay: DateTime(2030),
-                  rowHeight: MediaQuery.of(context).size.height *
-                      0.125, // TODO : 몇주가 있는지에 따라서 칸의 크기도 변경해야함
+                  rowHeight: MediaQuery.of(context).size.height * 0.125,
                   locale: 'ko-KR',
                   headerVisible: false,
                   headerStyle: const HeaderStyle(
@@ -83,14 +81,6 @@ class _HomePageState extends State<HomePage> {
                     ),
                     leftChevronVisible: false,
                     rightChevronVisible: false,
-                    // leftChevronIcon: Icon(
-                    //   Icons.arrow_left,
-                    //   size: 40.0,
-                    // ),
-                    // rightChevronIcon: Icon(
-                    //   Icons.arrow_right,
-                    //   size: 40.0,
-                    // ),
                   ),
                   onFormatChanged: (format) {
                     setState(() {
@@ -182,6 +172,7 @@ class _HomePageState extends State<HomePage> {
             setState(() {});
             // _openAddEventWindow(context);
             // TODO : navigate to add schedule page
+            Navigator.pushNamed(context, '/add');
           },
           child: const Icon(
             Icons.add,
